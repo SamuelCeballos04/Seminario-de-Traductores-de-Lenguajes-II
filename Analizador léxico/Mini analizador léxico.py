@@ -27,7 +27,7 @@ class miniLexico:
                     id = ""
                     real = ""
                     punto = False
-            elif (ascii> 64 and ascii < 91) or (ascii>96 and ascii<123) or (ascii==95):
+            elif (ascii> 64 and ascii < 91) or (ascii>96 and ascii<123):
                 if(len(real)>0 or punto ==True):
                     #print("Es letra, pero ya hay real")
                     print("Token no válido")
@@ -70,5 +70,5 @@ class miniLexico:
             print(id, "es un identificador")
 
 
-cadena = "a 13.25 hola 17.26 15.2 aaa_28 103.58"
+cadena = "526a.561"
 miniLexico(cadena).léxico()
