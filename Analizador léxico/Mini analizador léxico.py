@@ -70,5 +70,5 @@ class miniLexico:
             print(id, "es un identificador")
 
 
-cadena = "526a.561"
+cadena = "25.3"
 miniLexico(cadena).léxico()
