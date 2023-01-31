@@ -364,7 +364,7 @@ class Lexico:
         return listaTokens, listaEstados
 
                 
-cadena = "a + b + c + d + e + f $"
+cadena = "hola + mundo $"
 estados = []
 tokens = []
 tokens, estados = Lexico(cadena).léxico()
@@ -432,8 +432,6 @@ while i < len(estados):
         print(tokens[i], "es palabra reservada: else")    
     i+=1
 
-print("Lista de tokens: ", valoresTokens)
-
 LR1 = [[2,0,0,1],
         [0,0,-1,0],
         [0,3,0,0],
@@ -460,7 +458,7 @@ for objeto in valoresTokens:
     if objeto == "id":
         fila = int(pila[-1])
         columna = 0
-        salida = LR2[fila][columna]
+        salida = LR1[fila][columna]
         stringPila += tokens[i]
         stringPila += str(salida)
         datosSalida = "d" + str(salida)
@@ -471,7 +469,7 @@ for objeto in valoresTokens:
     elif objeto == "+":
         fila = int(pila[-1])
         columna = 1
-        salida = LR2[fila][columna]
+        salida = LR1[fila][columna]
         stringPila += tokens[i]
         stringPila += str(salida)
         datosSalida = "d" + str(salida)
@@ -482,7 +480,7 @@ for objeto in valoresTokens:
     elif objeto == "$":
         fila = int(pila[-1])
         columna = 2
-        salida = LR2[fila][columna] 
+        salida = LR1[fila][columna] 
         stringPila = "$0"
         stringPila += "E"
         stringPila += str(salida+5)
@@ -496,14 +494,11 @@ for objeto in valoresTokens:
         columna = 2
         salida = LR1[fila][columna]
         if salida == -1:
-            print("Aceptada")
-    print("Lista sobre la que se itera: ", valoresTokens)
-
+            print("La cadena es aceptada")
     i+=1    
 
-print("String Pila: ", stringPila)
-print("Datos finales: ", datosFin)
-print("Pila", pila)
+print(tabulate(datosFin, headers=["Pila", "Entrada", "Salida"]))
+
 
 
         
