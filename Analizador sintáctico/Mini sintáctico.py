@@ -1,3 +1,5 @@
+from tabulate import tabulate 
+
 class Lexico:
     def __init__(self, string):
         self.string = string + '$'
@@ -362,25 +364,29 @@ class Lexico:
         return listaTokens, listaEstados
 
                 
-cadena = "int $"
+cadena = "a + b + c + d + e + f $"
 estados = []
 tokens = []
 tokens, estados = Lexico(cadena).léxico()
 #print("Estado", estado, "Cadena", stringFinal)
 i = 0
+valoresTokens = []
 while i < len(estados):
     if(estados[i]==0):
         print(tokens[i], "no es válido")
+        valoresTokens.append("int")
     elif(estados[i]==1):
         print(tokens[i], "es un: entero")
     elif(estados[i]==3):
         print(tokens[i], "es un: real")
     elif(estados[i]==4):
         print(tokens[i], "es un: identificador")
+        valoresTokens.append("id")
     elif(estados[i]==6):
         print(tokens[i], "es un: string")
     elif(estados[i]==7):
         print(tokens[i], "es un: operador Suma")
+        valoresTokens.append("+")
     elif(estados[i]==8):
         print(tokens[i], "es un: operador Multiplicación")
     elif(estados[i]==9 or estados[i]==10):
@@ -409,6 +415,7 @@ while i < len(estados):
         print(tokens[i], "es una: llave de clausura")
     elif(estados[i]==24):
         print(tokens[i], "es un: EOF")
+        valoresTokens.append("$")
     elif(estados[i]==25):
         print(tokens[i], "es palabra reservada: int")
     elif(estados[i]==26):
@@ -422,10 +429,86 @@ while i < len(estados):
     elif(estados[i]==30):
         print(tokens[i], "es palabra reservada: return")
     elif(estados[i]==31):
-        print(tokens[i], "es palabra reservada: else")
-    
-
-    
+        print(tokens[i], "es palabra reservada: else")    
     i+=1
+
+print("Lista de tokens: ", valoresTokens)
+
+LR1 = [[2,0,0,1],
+        [0,0,-1,0],
+        [0,3,0,0],
+        [4,0,0,0],
+        [0,0,-2,0]]
+
+LR2 = [[2,0,0,1],
+        [0,0,-1,0],
+        [0,3,-3,0],
+        [2,0,0,4],
+        [0,0,-2,0]]
+
+pila = []
+pila.append("$")
+pila.append("0")
+fila = 0
+columna = 0
+datosFin = []
+stringPila = "$0"
+i = 0
+
+
+for objeto in valoresTokens:
+    if objeto == "id":
+        fila = int(pila[-1])
+        columna = 0
+        salida = LR2[fila][columna]
+        stringPila += tokens[i]
+        stringPila += str(salida)
+        datosSalida = "d" + str(salida)
+        pila.append(tokens[i])
+        pila.append(salida)
+        datosFin.append([stringPila, tokens[i], datosSalida])
+        datosSalida = ""
+    elif objeto == "+":
+        fila = int(pila[-1])
+        columna = 1
+        salida = LR2[fila][columna]
+        stringPila += tokens[i]
+        stringPila += str(salida)
+        datosSalida = "d" + str(salida)
+        pila.append(tokens[i])
+        pila.append(salida)
+        datosFin.append([stringPila, tokens[i], datosSalida])
+        datosSalida = ""
+    elif objeto == "$":
+        fila = int(pila[-1])
+        columna = 2
+        salida = LR2[fila][columna] 
+        stringPila = "$0"
+        stringPila += "E"
+        stringPila += str(salida+5)
+        datosSalida = "r" + str(salida+5)
+        del pila[2:]
+        pila.append("E")
+        pila.append("1")
+        datosFin.append([stringPila, tokens[i], datosSalida])
+        datosSalida = ""
+        fila = int(pila[-1])
+        columna = 2
+        salida = LR1[fila][columna]
+        if salida == -1:
+            print("Aceptada")
+    print("Lista sobre la que se itera: ", valoresTokens)
+
+    i+=1    
+
+print("String Pila: ", stringPila)
+print("Datos finales: ", datosFin)
+print("Pila", pila)
+
+
+        
+
+
+
 
 
