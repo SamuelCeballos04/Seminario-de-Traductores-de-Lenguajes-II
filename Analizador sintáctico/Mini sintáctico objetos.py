@@ -1,5 +1,25 @@
 from tabulate import tabulate 
 
+class ElementoPila:
+    def __init__(self, fuente, tipo):
+        self.fuente = fuente
+        self.tipo = tipo
+
+class Terminal(ElementoPila):
+    def __init__(self, fuente, tipo):
+        super().__init__(fuente, tipo)
+
+class NoTerminal(ElementoPila):
+    def __init__(self, fuente, tipo):
+        super().__init__(fuente, tipo)
+
+class Estado(ElementoPila):
+    def __init__(self, fuente, tipo):
+        super().__init__(fuente, tipo)
+
+listaEstados = []
+listaTerminales = []
+
 class Lexico:
     def __init__(self, string):
         self.string = string + '$'
@@ -82,8 +102,10 @@ class Lexico:
                     estado = 2
                     aux+=char
                 elif (ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -103,8 +125,10 @@ class Lexico:
                     estado = 3
                     aux+=char
                 elif (ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -120,43 +144,59 @@ class Lexico:
                     estado = 4
                     aux+=char
                 elif(aux == 'int'):
-                    listaEstados.append(25)
-                    listaTokens.append(aux)
+                    # listaEstados.append(25)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, 25)
+                    listaEstados.append(state)
                     estado = 0
                     aux = ""
                 elif(aux == "float"):
-                    listaEstados.append(26)
-                    listaTokens.append(aux)
+                    # listaEstados.append(26)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, 26)
+                    listaEstados.append(state)
                     estado = 0
                     aux = ""
                 elif (aux == "void"):
-                    listaEstados.append(27)
-                    listaTokens.append(aux)
+                    # listaEstados.append(27)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, 27)
+                    listaEstados.append(state)
                     estado = 0
                     aux = ""
                 elif(aux == "if"):
-                    listaEstados.append(28)
-                    listaTokens.append(aux)
+                    # listaEstados.append(28)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, 28)
+                    listaEstados.append(state)
                     estado = 0
                     aux = ""
                 elif(aux == "while"):
-                    listaEstados.append(29)
-                    listaTokens.append(aux)
+                    # listaEstados.append(29)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, 29)
+                    listaEstados.append(state)
                     estado = 0
                     aux = ""
                 elif (aux == "return"):
-                    listaEstados.append(30)
-                    listaTokens.append(aux)
+                    # listaEstados.append(30)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, 30)
+                    listaEstados.append(state)
                     estado = 0
                     aux = ""
                 elif(aux == "else"):
-                    listaEstados.append(31)
-                    listaTokens.append(aux)
+                    # listaEstados.append(31)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, 31)
+                    listaEstados.append(state)
                     estado = 0
                     aux = ""
                 elif (ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -182,8 +222,10 @@ class Lexico:
                     break
             elif(estado == 6):
                 if (ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -191,8 +233,10 @@ class Lexico:
                     break
             elif(estado == 7):
                 if (ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -200,8 +244,10 @@ class Lexico:
                     break
             elif(estado == 8):
                 if (ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -212,8 +258,10 @@ class Lexico:
                     estado = 10
                     aux+=char
                 elif(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -221,8 +269,10 @@ class Lexico:
                     break
             elif(estado == 10):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -237,8 +287,10 @@ class Lexico:
                     break  
             elif(estado == 12):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -253,8 +305,10 @@ class Lexico:
                     break  
             elif(estado == 14):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -265,8 +319,10 @@ class Lexico:
                     estado = 16
                     aux+=char
                 elif(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -274,8 +330,10 @@ class Lexico:
                     break       
             elif(estado == 16):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -283,8 +341,10 @@ class Lexico:
                     break     
             elif(estado == 17):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 elif(ascii == 61):
@@ -295,8 +355,10 @@ class Lexico:
                     break      
             elif(estado == 18):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -304,8 +366,10 @@ class Lexico:
                     break 
             elif(estado == 19):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -313,8 +377,10 @@ class Lexico:
                     break  
             elif(estado == 20):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -322,8 +388,10 @@ class Lexico:
                     break  
             elif(estado == 21):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -331,8 +399,10 @@ class Lexico:
                     break    
             elif(estado == 22):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -340,8 +410,10 @@ class Lexico:
                     break  
             elif(estado == 23):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
@@ -349,87 +421,103 @@ class Lexico:
                     break     
             elif(estado == 24):                
                 if(ascii==32):
-                    listaEstados.append(estado)
-                    listaTokens.append(aux)
+                    # listaEstados.append(estado)
+                    # listaTokens.append(aux)
+                    state = Estado(aux, estado)
+                    listaEstados.append(state)
                     aux = ""
                     estado = 0
                 else:
                     print("Algo salió mal")
                     break
-        listaEstados.append(estado)
-        listaTokens.append(aux)
+        # listaEstados.append(estado)
+        # listaTokens.append(aux)
+        print("Aux:", aux)
+        state = Estado(aux, estado)
+        listaEstados.append(state)
         #print("Caracter", aux)
-        print("Lista de tokens: ", listaTokens)
-        print("Lista de estados: ", listaEstados)
-        return listaTokens, listaEstados
+        # print("Lista de tokens: ", listaTokens)
+        # print("Lista de estados: ", listaEstados)
+        return listaEstados
 
                 
 cadena = "hola + mundo $"
 estados = []
 tokens = []
-tokens, estados = Lexico(cadena).léxico()
+# listaDeEstados = []
+listaDeEstados = Lexico(cadena).léxico()
 #print("Estado", estado, "Cadena", stringFinal)
 i = 0
 valoresTokens = []
-while i < len(estados):
-    if(estados[i]==0):
-        print(tokens[i], "no es válido")
-        valoresTokens.append("int")
-    elif(estados[i]==1):
-        print(tokens[i], "es un: entero")
-    elif(estados[i]==3):
-        print(tokens[i], "es un: real")
-    elif(estados[i]==4):
-        print(tokens[i], "es un: identificador")
-        valoresTokens.append("id")
-    elif(estados[i]==6):
-        print(tokens[i], "es un: string")
-    elif(estados[i]==7):
-        print(tokens[i], "es un: operador Suma")
-        valoresTokens.append("+")
-    elif(estados[i]==8):
-        print(tokens[i], "es un: operador Multiplicación")
-    elif(estados[i]==9 or estados[i]==10):
-        print(tokens[i], "es un: operador Relacional")
-    elif(estados[i]==12):
-        print(tokens[i], "es un: operador OR")
-    elif(estados[i]==14):
-        print(tokens[i], "es un: operador AND")
-    elif(estados[i]==15):
-        print(tokens[i], "es un: operador NOT")
-    elif(estados[i]==16):
-        print(tokens[i], "es un: operador IGUALDAD")
-    elif(estados[i]==17):
-        print(tokens[i], "es un: símbolo igualdad")
-    elif(estados[i]==18):
-        print(tokens[i], "es un: punto y coma")
-    elif(estados[i]==19):
-        print(tokens[i], "es una: coma")
-    elif(estados[i]==20):
-        print(tokens[i], "es un: paréntesis de apertura")
-    elif(estados[i]==21):
-        print(tokens[i], "es un: paréntesis de cierre")
-    elif(estados[i]==22):
-        print(tokens[i], "es una: llave de apertura")
-    elif(estados[i]==23):
-        print(tokens[i], "es una: llave de clausura")
-    elif(estados[i]==24):
-        print(tokens[i], "es un: EOF")
-        valoresTokens.append("$")
-    elif(estados[i]==25):
-        print(tokens[i], "es palabra reservada: int")
-    elif(estados[i]==26):
-        print(tokens[i], "es palabra reservada: float")
-    elif(estados[i]==27):
-        print(tokens[i], "es palabra reservada: void")
-    elif(estados[i]==28):
-        print(tokens[i], "es palabra reservada: if")
-    elif(estados[i]==29):
-        print(tokens[i], "es palabra reservada: while")
-    elif(estados[i]==30):
-        print(tokens[i], "es palabra reservada: return")
-    elif(estados[i]==31):
-        print(tokens[i], "es palabra reservada: else")    
+print("Len lista de estados: ", len(listaDeEstados))
+while i < len(listaDeEstados):
+    print("Tipo: ", listaDeEstados[i].tipo)
+    print("Fuente: ", listaDeEstados[i].fuente)
+    if(listaDeEstados[i].tipo==0):
+        print(listaDeEstados[i].fuente, "no es válido")
+        terminal = Terminal(listaDeEstados[i].fuente, "no válido")
+        listaTerminales.append(terminal)
+    elif(listaDeEstados[i].tipo==1):
+        print(listaDeEstados[i].fuente, "es un: entero")
+    elif(listaDeEstados[i].tipo==3):
+        print(listaDeEstados[i].fuente, "es un: real")
+    elif(listaDeEstados[i].tipo==4):
+        print(listaDeEstados[i].fuente, "es un: identificador")
+        # valoresTokens.append("id")
+        terminal = Terminal(listaDeEstados[i].fuente, "id")
+        listaTerminales.append(terminal)
+    elif(listaDeEstados[i].tipo==6):
+        print(listaDeEstados[i].fuente, "es un: string")
+    elif(listaDeEstados[i].tipo==7):
+        print(listaDeEstados[i].fuente, "es un: operador Suma")
+        # valoresTokens.append("+")
+        terminal = Terminal(listaDeEstados[i].fuente, "+")
+        listaTerminales.append(terminal)
+    elif(listaDeEstados[i].tipo==8):
+        print(listaDeEstados[i].fuente, "es un: operador Multiplicación")
+    elif(listaDeEstados[i].tipo==9 or listaDeEstados[i].tipo==10):
+        print(listaDeEstados[i].fuente, "es un: operador Relacional")
+    elif(listaDeEstados[i].tipo==12):
+        print(listaDeEstados[i].fuente, "es un: operador OR")
+    elif(listaDeEstados[i].tipo==14):
+        print(listaDeEstados[i].fuente, "es un: operador AND")
+    elif(listaDeEstados[i].tipo==15):
+        print(listaDeEstados[i].fuente, "es un: operador NOT")
+    elif(listaDeEstados[i].tipo==16):
+        print(listaDeEstados[i].fuente, "es un: operador IGUALDAD")
+    elif(listaDeEstados[i].tipo==17):
+        print(listaDeEstados[i].fuente, "es un: símbolo igualdad")
+    elif(listaDeEstados[i].tipo==18):
+        print(listaDeEstados[i].fuente, "es un: punto y coma")
+    elif(listaDeEstados[i].tipo==19):
+        print(listaDeEstados[i].fuente, "es una: coma")
+    elif(listaDeEstados[i].tipo==20):
+        print(listaDeEstados[i].fuente, "es un: paréntesis de apertura")
+    elif(listaDeEstados[i].tipo==21):
+        print(listaDeEstados[i].fuente, "es un: paréntesis de cierre")
+    elif(listaDeEstados[i].tipo==22):
+        print(listaDeEstados[i].fuente, "es una: llave de apertura")
+    elif(listaDeEstados[i].tipo==23):
+        print(listaDeEstados[i].fuente, "es una: llave de clausura")
+    elif(listaDeEstados[i].tipo==24):
+        print(listaDeEstados[i].fuente, "es un: EOF")
+        # valoresTokens.append("$")
+        terminal = Terminal(listaDeEstados[i].fuente, "$")
+        listaTerminales.append(terminal)
+    elif(listaDeEstados[i].tipo==25):
+        print(listaDeEstados[i].fuente, "es palabra reservada: int")
+    elif(listaDeEstados[i].tipo==26):
+        print(listaDeEstados[i].fuente, "es palabra reservada: float")
+    elif(listaDeEstados[i].tipo==27):
+        print(listaDeEstados[i].fuente, "es palabra reservada: void")
+    elif(listaDeEstados[i].tipo==28):
+        print(listaDeEstados[i].fuente, "es palabra reservada: if")
+    elif(listaDeEstados[i].tipo==29):
+        print(listaDeEstados[i].fuente, "es palabra reservada: while")
+    elif(listaDeEstados[i].tipo==30):
+        print(listaDeEstados[i].fuente, "es palabra reservada: return")
+    elif(listaDeEstados[i].tipo==31):
+        print(listaDeEstados[i].fuente, "es palabra reservada: else")    
     i+=1
 
 LR1 = [[2,0,0,1],
@@ -445,8 +533,10 @@ LR2 = [[2,0,0,1],
         [0,0,-2,0]]
 
 pila = []
-pila.append("$")
-pila.append("0")
+terminalPila = Terminal("$", "$")
+pila.append(terminalPila)
+terminalPila = Terminal("0", "0")
+pila.append(terminalPila)
 fila = 0
 columna = 0
 datosFin = []
@@ -454,31 +544,33 @@ stringPila = "$0"
 i = 0
 
 
-for objeto in valoresTokens:
-    if objeto == "id":
-        fila = int(pila[-1])
+
+for objeto in listaTerminales:
+    if objeto.tipo == "id":
+        fila = int(pila[-1].tipo)
         columna = 0
         salida = LR1[fila][columna]
-        stringPila += tokens[i]
+        # stringPila += tokens[i]
+        stringPila += objeto.fuente
         stringPila += str(salida)
         datosSalida = "d" + str(salida)
-        pila.append(tokens[i])
-        pila.append(salida)
-        datosFin.append([stringPila, tokens[i], datosSalida])
+        terminal = Terminal(objeto.fuente, salida)
+        pila.append(terminal)
+        datosFin.append([stringPila, objeto.fuente, datosSalida])
         datosSalida = ""
-    elif objeto == "+":
-        fila = int(pila[-1])
+    elif objeto.tipo == "+":
+        fila = int(pila[-1].tipo)
         columna = 1
         salida = LR1[fila][columna]
-        stringPila += tokens[i]
+        stringPila += objeto.fuente
         stringPila += str(salida)
         datosSalida = "d" + str(salida)
-        pila.append(tokens[i])
-        pila.append(salida)
-        datosFin.append([stringPila, tokens[i], datosSalida])
+        terminal = Terminal(objeto.fuente, salida)
+        pila.append(terminal)
+        datosFin.append([stringPila, objeto.fuente, datosSalida])
         datosSalida = ""
-    elif objeto == "$":
-        fila = int(pila[-1])
+    elif objeto.tipo == "$":
+        fila = int(pila[-1].tipo)
         columna = 2
         salida = LR1[fila][columna] 
         stringPila = "$0"
@@ -486,11 +578,11 @@ for objeto in valoresTokens:
         stringPila += str(salida+5)
         datosSalida = "r" + str(salida+5)
         del pila[2:]
-        pila.append("E")
-        pila.append("1")
-        datosFin.append([stringPila, tokens[i], datosSalida])
+        terminal = Terminal("E", "1")
+        pila.append(terminal)
+        datosFin.append([stringPila, objeto.fuente, datosSalida])
         datosSalida = ""
-        fila = int(pila[-1])
+        fila = int(pila[-1].tipo)
         columna = 2
         salida = LR1[fila][columna]
         if salida == -1:

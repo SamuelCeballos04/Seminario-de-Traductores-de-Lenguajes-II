@@ -1,13 +1,24 @@
-lista = ["0", "1", "2", "3", "4", "5", "6"]
-cont = 2
-print(lista[-cont:])
+from tabulate import tabulate 
 
-LR1 = [[2,0,0,1],
-        [0,0,-1,0],
-        [0,3,0,0],
-        [4,0,0,0],
-        [0,0,-2,0]]
+class ElementoPila:
+    def __init__(self, fuente, tipo):
+        self.fuente = fuente
+        self.tipo = tipo
 
-salida = LR1[0][3]
+class Terminal(ElementoPila):
+    def __init__(self, fuente, tipo):
+        super().__init__(fuente, tipo)
 
-print(salida)
+class NoTerminal(ElementoPila):
+    def __init__(self, fuente, tipo):
+        super().__init__(fuente, tipo)
+
+class Estado(ElementoPila):
+    def __init__(self, fuente, tipo):
+        super().__init__(fuente, tipo)
+
+lista = []
+
+estado = Estado("hola", 1)
+lista.append(estado)
+print("Lista", lista[0].tipo)
