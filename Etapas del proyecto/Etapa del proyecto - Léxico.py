@@ -362,7 +362,7 @@ class Lexico:
         return listaTokens, listaEstados
 
                 
-cadena = "int $"
+cadena = "11.2 $"
 estados = []
 tokens = []
 tokens, estados = Lexico(cadena).léxico()
