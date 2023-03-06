@@ -17,49 +17,40 @@ class Estado(ElementoPila):
     def __init__(self, fuente, tipo):
         super().__init__(fuente, tipo)
 
-class Regla:
-    def init(self, aux, num, elementos, regla):
-        self.aux = aux
-        self.num = num
-        self.elementos = elementos
-        self.regla = regla
-
 listaEstados = []
 listaTerminales = []
-matrizreglas = list()
-auxregl = list()
-lisreglas = list()
+archivo = open('compilador.lr','r')
+lines = archivo.readlines()
 pila = list()
 pilaS = ""
+tlr1 = list()
+num = 0
+reglas  = list()
+reg = 0
 
-def reglas():
-    file = open('compilador.lr', 'r')
-    line = file.readlines()
-    for l in line:
-        l = l.rstrip()
-        matrizreglas.append(l.split('\t'))
+class Regla:
+    def __init__(self, num, num2, elem, fuente):
+        self.num = num
+        self.num2 = num2
+        self.elem = elem
+        self.fuente = fuente
 
-    for i in range (len(matrizreglas)):
-        for j in range(len(matrizreglas[i])):
-            matrizreglas[i][j] = int(matrizreglas[i][j])
-    file.close()
-
-def auxreglas():
-    n = 1
-    file = open('rgl.txt', 'r')
-    line = file.readlines()
-    for l in line:
-        l = l.rstrip()
-        auxregl.append(l.split('\t'))
-
-    for obj in auxregl:
-        obj = Regla(n, int(obj[0]), int(obj[1]), str(obj[2]))
-        n+=1
-        lisreglas.append(obj)
-    file.close()
-
-reglas()
-auxreglas()
+for line in lines:
+    line = line.rstrip()
+    line = line.split("\t")
+    if (reg == 1):
+        tlr1.append(line)
+        for i in range(len(tlr1)):
+            for j in range(len(tlr1[i])):
+                tlr1[i][j] = int(tlr1[i][j])
+    if (line[0]=='52'):
+        continue
+    if (line[0]=='95'):
+        reg = 1
+    if (reg == 0):
+        num += 1
+        obj = Regla(num, int(line[0]), int(line[1]), line[2])
+        reglas.append(obj)
 
 
 class Lexico:
@@ -617,32 +608,23 @@ LR2 = [[2,0,0,1],
         [2,0,0,4],
         [0,0,-2,0]]
 
-pila = []
-terminalPila = Terminal("$", "$")
-pila.append(terminalPila)
-terminalPila = Terminal("0", "0")
-pila.append(terminalPila)
+
+
 fila = 0
 columna = 0
 datosFin = []
-stringPila = "$0"
-pila = list()
-pilaS = ""
 i = 0
-tlr1 = list()
-data = list()
-pila.append(Terminal("$", 23))
+data = []
+pila.append(Terminal("$", 100))
 pila.append(Estado("", 0))
 
-print("Matriz reglas: ", matrizreglas)
+
 while True:
     obj = listaTerminales[i]
-    fila = pila[-1].tipo
-    print("Fila: ", fila)
-    print("OVJETO", obj.tipo)
+    fila = pila[-1]
+    print("OVJETO", obj.fuente)
     columna = obj.tipo
-    print("Columna: ", columna)
-    accion = matrizreglas[fila][columna]
+    accion = tlr1[fila.tipo][columna]
     print("ACCION", accion)
     #print("FILA", fila.fuente)
     #print("COLUMNA", columna)
@@ -657,39 +639,42 @@ while True:
         acc = "d"+str(accion)
         pila.append(Terminal(obj.fuente, obj.tipo))
         print("ACC", accion)
-        pila.append(Estado(accion))
+        pila.append(Estado("", accion))
     elif (accion == -1):
         acc = "r0(acept)"
         print("R0")
         break
     else:
         acc = "r"+str(abs(accion+1))
-        for obj2 in lisreglas:
+        for obj2 in reglas:
             if (accion == (obj2.num + 1)*-1):
                 acc = "r"+str(obj2.num)
-                accion = matrizreglas[fila.fuente][obj2.num2]
+                accion = tlr1[fila.tipo][obj2.num2]
                 if obj2.elem !=0:
                     elim = obj2.elem*2
                     while elim !=0:
                         pila.pop()
                         elim -=1
                     fila = pila[-1]
-                    accion = matrizreglas[fila.fuente][obj2.num2]
+                    accion = tlr1[fila.tipo][obj2.num2]
                     pila.append(obj2)
-                    pila.append(Estado(accion))
+                    pila.append(Estado("", accion))
                 else:
                     print("obb", obj.fuente)
                     pila.append(obj2)
-                    pila.append(Estado(accion))
+                    pila.append(Estado("", accion))
                 break
     if(i == len(listaTerminales)):
         print("FIN")
+        
+                
 
-for p in pila:
-    pilaS += str(p.fuente)
+    for p in pila:
+        #print("PPPPP", p)
+        pilaS += str(p.fuente)
     data.append([pilaS, obj.fuente, acc])
     pilaS = ""
-    
+
 print(tabulate(data, headers=["Pila", "Entrada", "Salida"]))
 
 
