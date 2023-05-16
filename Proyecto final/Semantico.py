@@ -1495,7 +1495,7 @@ class analizador:
                 elif c == "(":
                     self.tmp +=c
                     self.tipo.append(14)
-                    objlex = Terminal(self.tmp, 'Parentesis Iz', self.tipo[-1])
+                    objlex = Terminal(self.tmp, 'Parentesis Aper', self.tipo[-1])
                     list_lex.append(objlex)
                     self.edo = 0
                     globals()['ban_p']+=1
@@ -1503,7 +1503,7 @@ class analizador:
                 elif c == ")":
                     self.tmp +=c
                     self.tipo.append(15)
-                    objlex = Terminal(self.tmp, 'Parentesis Der', self.tipo[-1])
+                    objlex = Terminal(self.tmp, 'Parentesis Clau', self.tipo[-1])
                     list_lex.append(objlex)
                     self.limpieza()
                     if globals()['ban_p']!=0:
@@ -1516,7 +1516,7 @@ class analizador:
                 elif c == "{":
                     self.tmp +=c
                     self.tipo.append(16)
-                    objlex = Terminal(self.tmp, 'Corchete Iz', self.tipo[-1])
+                    objlex = Terminal(self.tmp, 'Corchete Aper', self.tipo[-1])
                     list_lex.append(objlex)
                     self.edo = 0
                     globals()['ban_c']+=1
@@ -1524,7 +1524,7 @@ class analizador:
                 elif c == "}":
                     self.tmp +=c
                     self.tipo.append(17)
-                    objlex = Terminal(self.tmp, 'Corchete Der', self.tipo[-1])
+                    objlex = Terminal(self.tmp, 'Corchete Clau', self.tipo[-1])
                     list_lex.append(objlex)
                     self.limpieza()
                     if globals()['ban_c']!=0:
@@ -2152,7 +2152,7 @@ for objlex in list_lex:
     if band == 0:
         data.append([objlex.cad, objlex.tipo, objlex.pos])
     list_entrada.append(objlex.cad)
-print(tabulate(data, headers=["Entrada", "Tipo", "Token"]))
+print(tabulate(data, headers=["Token", "Símbolo", "Tipo"]))
 entrada.clear()    
 entrada=list_entrada
 auxelimna = (len(entrada)-2)*2
