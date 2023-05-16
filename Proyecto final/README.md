@@ -1,6 +1,3 @@
-# Seminario-de-Traductores-de-Lenguajes-II
-Repositorio para la materia Seminario de Solución de Problemas de Traductores de Lenguajes II
-
 Proyecto final
 Comenzamos analizando el léxico de los tokens ingresados como entrada:
 
@@ -20,3 +17,5 @@ Finalmente, nos expulsa un código ASM que contiene lo que nuestro código de en
 
 Al ejecutar el código, la salida es la siguiente: 
 ![My Image](/Proyecto%20final/images/Ejecucion.png)
+
+
