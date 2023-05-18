@@ -2180,11 +2180,14 @@ else:
     for pre, fill, node in RenderTree(raiz):
         print("%s%s" % (pre, node.name))
 
-    print('\n\n Analizador Semántico')
-    print('Tipo Dato', f"{'':>4}", 'Variable', f"{'':>5}", 'Seccion', f"{'':<11}")
-    print('-----------------------------------')
+    print('\n\nAnalizador Semántico')
+    data2 = []
+    #print('Tipo Dato', f"{'':>4}", 'Variable declarada', f"{'':>5}", 'Uso', f"{'':<11}")
+    #print('-----------------------------------')
+
     for obj in lista_variables:
-        print(obj.data.cad, f"{'|':>11}", obj.tipo.cad, f"{'|':>9}", obj.lv)
+        data2.append([obj.tipo.cad, obj.lv, obj.data.cad])
+    print(tabulate(data2, headers=["Variable declarada", "Uso", "Tipo de dato"]))
     print("\n\n\t\tCodigo Ensamblador")
     code.gettraduccion()
 
